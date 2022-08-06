@@ -1,0 +1,73 @@
+Explanation #1
+
+for row in(self.board[i*3:(i+1)*3] for i in range(3)):
+            print("| " + " | ".join(row) + " |")
+
+For the (self.board[i*3:(i+1)*3] for i in range(3)), it's 
+saying which group of three spaces are we choosing.
+
+Since i in range (3) means i = 0, 1, 2. For instance, if i = 0, 
+the range self.board[i*3:(i+1)*3] means self.board[0*3:(0+1)*3],
+which is self.board[0:3], so the index 0, 1, 2 of the 1D array board.
+
+For the print statement, the .join() function can be seen like this
+
+>>> myList = ["a", "b", "c"]
+>>> print(" | ".join(myTuple))
+a | b | c
+
+So we can ignore the first "| " and last " |". The middle " | ".join(row),
+where row is currently " ", " ", " " (since row in self.board[0:3]/
+self.board[3:6]/self.board[6:9]), can be view as this
+
+>>> row = [" ", " ", " "]
+>>> print(" | ".join(row))
+  |   |  
+
+Together, print("| " + " | ".join(row) + " |") produce this
+|   |   |   |
+
+
+Explanation #2
+
+Currently, since we are playing against the computer, we want to 
+print out every step of the game, hence setting printGame = True.
+However, if later on, we wanted to see Computer vs Computer playing
+for a bunch of iteration, and we don't want to see it print out every 
+single game, we can set printGame = False
+
+
+Explanation #3
+
+Since the board display to user is
+
+1 | 2 | 3
+4 | 5 | 6
+7 | 8 | 9
+
+but the board indexing is 
+
+0 | 1 | 2
+3 | 4 | 5
+6 | 7 | 8
+
+we always wanted (square -1). Ok, let's take an example where the player
+square input is 4, which is 3 in the indexing. 3//3 = 1, and the row 
+we checked is [i*3:(i+1)*3], which is [3:6] (where i == 1)
+
+
+Explanation #4
+
+0 | 1 | 2
+3 | 4 | 5
+6 | 7 | 8
+
+0   1   2
+
+We notice that the first column, when divided by 3, always give a 
+remainder of 0, and the second column give a remainder of 1, and the
+third column give a remainder of 2. If the remainder is 1 (second row),
+
+[columnIndex + (i*3)] for i in range (3) 
+
+[1 + 0], [1 + 3], [1 + 6] → [1], [4], [7]
